@@ -4,6 +4,9 @@
 ### own directories
 resources/*
 
+### CatBoost
+*/catboost_info/*
+
 ### JupyterNotebook ###
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
