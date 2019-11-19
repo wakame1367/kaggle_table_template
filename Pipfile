@@ -7,8 +7,8 @@ name = "pypi"
 scikit-learn = "*"
 pandas = "*"
 numpy = "*"
-catboost = "*"
 lightgbm = "*"
+catboost = "==0.18.1"
 
 [dev-packages]
 pytest = "*"
