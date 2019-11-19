@@ -4,6 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+scikit-learn = "*"
+pandas = "*"
+numpy = "*"
+catboost = "*"
+lightgbm = "*"
 
 [dev-packages]
 
