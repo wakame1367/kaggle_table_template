@@ -1,9 +1,13 @@
 import lightgbm as lgb
-from pathlib import Path
-from .base import Base_Model
+
+from .base import BaseModel
 
 
-class LightGBM(Base_Model):
+class LightGBM(BaseModel):
+    """
+        References:
+            https://www.kaggle.com/hidehisaarai1213/dsb2019-baseline/
+        """
     def fit(self, x_train, y_train, x_valid, y_valid, config):
         d_train = lgb.Dataset(x_train, label=y_train)
         d_valid = lgb.Dataset(x_valid, label=y_valid)
@@ -14,17 +18,18 @@ class LightGBM(Base_Model):
             train_set=d_train,
             valid_sets=[d_valid],
             valid_names=['valid'],
-            # categorical_feature = [col for col in x_train.columns if col.find("Label_En") != -1],
+            # categorical_feature = [col for col in x_train.columns
+            # if col.find("Label_En") != -1],
             **lgb_train_params
         )
         best_score = dict(model.best_score)
         return model, best_score
-    
+
     def get_best_iteration(self, model):
         return model.best_iteration
-    
+
     def predict(self, model, features):
         return model.predict(features)
-        
+
     def get_feature_importance(self, model):
         return model.feature_importance(importance_type='gain')

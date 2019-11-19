@@ -1,9 +1,9 @@
 from catboost import CatBoostClassifier, CatBoostRegressor
 
-from .base import Base_Model
+from .base import BaseModel
 
 
-class CatBoost(Base_Model):
+class CatBoost(BaseModel):
     """
     References:
         https://www.kaggle.com/hidehisaarai1213/dsb2019-baseline/
