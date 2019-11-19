@@ -1,12 +1,20 @@
-from pathlib import Path
+from catboost import CatBoostClassifier, CatBoostRegressor
+
 from .base import Base_Model
-from catboost import CatBoostClassifier, Pool
 
 
-class Catboost(Base_Model):
+class CatBoost(Base_Model):
+    """
+    References:
+        https://www.kaggle.com/hidehisaarai1213/dsb2019-baseline/
+    """
     def fit(self, x_train, y_train, x_valid, y_valid, config):
-        cat_model_params = config["model"]["model_params"]
-        model = CatBoostClassifier(**cat_model_params)
+        model_params = config["model"]["model_params"]
+        mode = config["model"]["train_params"]["mode"]
+        if mode == "regression":
+            model = CatBoostRegressor(**model_params)
+        else:
+            model = CatBoostClassifier(**model_params)
         model.fit(
             x_train, y_train,
             eval_set=(x_valid, y_valid),
