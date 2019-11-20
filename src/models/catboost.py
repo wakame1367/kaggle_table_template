@@ -1,4 +1,4 @@
-from catboost import CatBoostClassifier, CatBoostRegressor
+from catboost import CatBoostClassifier, CatBoostRegressor, Pool
 
 from .base import BaseModel
 
@@ -9,6 +9,8 @@ class CatBoost(BaseModel):
         https://www.kaggle.com/hidehisaarai1213/dsb2019-baseline/
     """
     def fit(self, x_train, y_train, x_valid, y_valid, config):
+        cat_train = Pool(x_train, label=y_train)
+        cat_valid = Pool(x_valid, label=y_valid)
         model_params = config["model"]["model_params"]
         mode = config["model"]["train_params"]["mode"]
         if mode == "regression":
@@ -16,8 +18,8 @@ class CatBoost(BaseModel):
         else:
             model = CatBoostClassifier(**model_params)
         model.fit(
-            x_train, y_train,
-            eval_set=(x_valid, y_valid),
+            cat_train,
+            eval_set=cat_valid,
             use_best_model=True,
             verbose=True
         )
