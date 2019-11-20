@@ -10,7 +10,7 @@ from sklearn.metrics import roc_auc_score
 AoD = Union[np.ndarray, pd.DataFrame]
 AoS = Union[np.ndarray, pd.Series]
 CatModel = Union[cat.CatBoostClassifier, cat.CatBoostRegressor]
-LGBModel = Union[lgb.LGBMClassifier, lgb.LGBMRegressor]
+LGBModel = Union[lgb.Booster]
 Model = Union[CatModel, LGBModel]
 
 
